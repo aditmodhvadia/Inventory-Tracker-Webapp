@@ -11,6 +11,7 @@ import store, { rrfProps } from './store';
 import ErrorPage from './components/layouts/ErrorPage';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { UserIsAuthenticated, UserIsNotAuthenticated } from './helpers/auth'
+import { HOME_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from './routes';
 
 function App() {
   return (
@@ -24,9 +25,9 @@ function App() {
                 <Route exact path="/">
                   <Redirect to="/home" />
                 </Route>
-                <Route exact path="/home" component={UserIsAuthenticated(Dashboard)} />
-                <Route exact path="/login" component={UserIsNotAuthenticated(Login)} />
-                <Route exact path="/register" component={UserIsNotAuthenticated(Register)} />
+                <Route exact path={HOME_ROUTE} component={UserIsAuthenticated(Dashboard)} />
+                <Route exact path={LOGIN_ROUTE} component={UserIsNotAuthenticated(Login)} />
+                <Route exact path={REGISTER_ROUTE} component={UserIsNotAuthenticated(Register)} />
                 <Route component={ErrorPage} />
               </Switch>
             </div>

@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firebaseConnect } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
-import { Button, Box } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 class AppNavbar extends Component {
     state = {
@@ -40,11 +38,10 @@ class AppNavbar extends Component {
                         <Button to="/" component={Link} color="inherit" size="large">Track Items</Button>
                         <div style={{ flexGrow: 1 }}></div>
                         {isAuthenticated ?
-                            <Button size="large" to="/dashboard" component={Link} color="inherit">Dashboard</Button>
-                            : null}
-
-                        {isAuthenticated ?
                             <Typography color="inherit" >{auth.email}</Typography>
+                            : null}
+                        {isAuthenticated ?
+                            <Button size="large" to="/dashboard" component={Link} color="inherit">Dashboard</Button>
                             : null}
                         {isAuthenticated ? null :
                             <React.Fragment>
@@ -53,7 +50,7 @@ class AppNavbar extends Component {
                             </React.Fragment>
                         }
                         {isAuthenticated ?
-                            <Button size="large" color="inherit" onClick={this.onLogoutClicked}>Logout</Button>
+                            <Button size="large" color="secondary" variant="contained" onClick={this.onLogoutClicked}>Logout</Button>
                             : null
                         }
                     </Toolbar>

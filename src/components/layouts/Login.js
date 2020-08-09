@@ -3,6 +3,8 @@ import { Grid, Button, Typography, TextField, Box } from '@material-ui/core'
 import LockIcon from '@material-ui/icons/Lock';
 import { firebaseConnect } from 'react-redux-firebase'
 import PropTypes from 'prop-types'
+import { isEmailValid, isPasswordValid, arePasswordsMatching } from '../../helpers/utils';
+import { HOME_ROUTE } from '../../routes';
 
 
 class Login extends Component {
@@ -19,6 +21,16 @@ class Login extends Component {
         event.preventDefault()
         const { email, password } = this.state
 
+        if (!isEmailValid(email)) {
+            console.error('Email is invalid')
+            return
+        }
+
+        if (!isPasswordValid(password)) {
+            console.error('Password is invalid')
+            return
+        }
+
         const { firebase, history } = this.props
 
         firebase.login({
@@ -27,7 +39,7 @@ class Login extends Component {
         }).catch(e => {
             // TODO: Notify user of the error
         }).then(() => {
-            history.push('/home')
+            history.push(HOME_ROUTE)
         }).then(() => {
             this.setState({
                 email: '',
