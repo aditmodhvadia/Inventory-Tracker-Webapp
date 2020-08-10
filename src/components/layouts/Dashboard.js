@@ -9,7 +9,7 @@ class Dashboard extends Component {
       <React.Fragment>
         <Box m={2}>
           <Grid container direction='column'>
-            <Grid container xs={12} alignItems='flex-end' justify='flex-end'>
+            <Grid container alignItems='flex-end' justify='flex-end'>
               <AddItemButton />
             </Grid>
             <Grid item xs={12}>
