@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFirestoreConnect } from 'react-redux-firebase';
+import { useFirestoreConnect, useFirebase, useFirestore } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import {
   Card,
@@ -10,9 +10,16 @@ import {
   Grid,
   Box,
 } from '@material-ui/core';
+import InventoryItem from './InventoryItem';
 
 const InventoryItems = () => {
+  const firestore = useFirestore()
   const { auth } = useSelector((state) => state.firebase);
+
+  const onDeleteClicked = (e, itemId) => {
+    firestore.delete({ collection: `users/${auth.uid}/inventoryItems`, doc: itemId.toString() })
+      .then(console.log("Item deleted"))
+  }
   useFirestoreConnect([
     {
       collection: `users/${auth.uid}/inventoryItems`,
@@ -38,22 +45,10 @@ const InventoryItems = () => {
 
   if (inventoryItems && inventoryItems.length > 0) {
     return (
-      <Grid container column spacing={4} margi>
+      <Grid container spacing={4}>
         {inventoryItems.map((item) => (
-          <Grid item xs={12} sm={6} md={4}>
-            <Card key={item.itemId}>
-              <CardContent>
-                <Typography variant='h5' component='h2'>
-                  {item.itemName}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size='small'>Details</Button>
-                <Button size='small' variant='outlined' color='primary'>
-                  Delete
-                </Button>
-              </CardActions>
-            </Card>
+          <Grid item xs={12} sm={6} md={4} key={item.itemId}>
+            <InventoryItem item={item} onDeleteClicked={(e) => onDeleteClicked(e, item.itemId)} />
           </Grid>
         ))}
       </Grid>

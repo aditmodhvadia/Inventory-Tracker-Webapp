@@ -21,8 +21,10 @@ import {
   LOGIN_ROUTE,
   REGISTER_ROUTE,
   ADD_ITEM_ROUTE,
+  ITEM_DETAIL_ROUTE,
 } from './routes';
 import AddItem from './components/inventoryitems/AddItem';
+import InventoryItemDetail from './components/inventoryitems/InventoryItemDetail';
 
 function App() {
   return (
@@ -55,6 +57,11 @@ function App() {
                   exact
                   path={ADD_ITEM_ROUTE}
                   component={UserIsAuthenticated(AddItem)}
+                />
+                <Route
+                  exact
+                  path={ITEM_DETAIL_ROUTE}
+                  component={UserIsAuthenticated(InventoryItemDetail)}
                 />
                 <Route component={ErrorPage} />
               </Switch>
