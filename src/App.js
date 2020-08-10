@@ -25,7 +25,7 @@ function App() {
                 <Route exact path="/">
                   <Redirect to="/home" />
                 </Route>
-                <Route exact path={HOME_ROUTE} component={UserIsAuthenticated(Dashboard)} />
+                <Route exact path={HOME_ROUTE} component={UserIsAuthenticated((Dashboard))} />
                 <Route exact path={LOGIN_ROUTE} component={UserIsNotAuthenticated(Login)} />
                 <Route exact path={REGISTER_ROUTE} component={UserIsNotAuthenticated(Register)} />
                 <Route component={ErrorPage} />

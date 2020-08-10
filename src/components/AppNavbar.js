@@ -40,9 +40,6 @@ class AppNavbar extends Component {
                         {isAuthenticated ?
                             <Typography color="inherit" >{auth.email}</Typography>
                             : null}
-                        {isAuthenticated ?
-                            <Button size="large" to="/dashboard" component={Link} color="inherit">Dashboard</Button>
-                            : null}
                         {isAuthenticated ? null :
                             <React.Fragment>
                                 <Button size="large" to="/login" component={Link} color="inherit">Login</Button>

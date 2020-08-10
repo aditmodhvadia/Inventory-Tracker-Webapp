@@ -8,11 +8,11 @@ const theme = createMuiTheme({
         },
         secondary: {
             main: green[500],
-        },
-        danger: {
-            main: red[500]
         }
     },
+    status: {
+        danger: red[500]
+    }
 });
 
 export default theme
