@@ -48,7 +48,7 @@ const InventoryItems = () => {
       <Grid container spacing={4}>
         {inventoryItems.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item.itemId}>
-            <InventoryItem item={item} onDeleteClicked={onDeleteClicked} />
+            <InventoryItem item={item} onDeleteClicked={(e) => onDeleteClicked(e, item.itemId)} />
           </Grid>
         ))}
       </Grid>

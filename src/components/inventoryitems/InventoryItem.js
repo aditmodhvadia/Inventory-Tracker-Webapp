@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardContent, Typography, CardActions, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import DeleteInventoryItemButton from '../DeleteInventoryItemButton'
 
 const InventoryItem = ({ item, onDeleteClicked }) => {
     return (
@@ -12,9 +13,7 @@ const InventoryItem = ({ item, onDeleteClicked }) => {
             </CardContent>
             <CardActions>
                 <Button size='small' component={Link} to={`item/${item.itemId}`}>Details</Button>
-                <Button size='small' variant='outlined' color='primary' onClick={(e) => onDeleteClicked(e, item.itemId)}>
-                    Delete
-                </Button>
+                <DeleteInventoryItemButton onClick={onDeleteClicked} />
             </CardActions>
         </Card>
     )

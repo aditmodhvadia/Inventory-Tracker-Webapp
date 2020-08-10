@@ -10,13 +10,8 @@ const BackToHomeButton = () => {
     const onBackToHomeClicked = () => {
         history.goBack()
     }
-    return (
-        <React.Fragment>
-            <Box m={3}>
-                <Button startIcon={<ArrowBackIcon />} color="primary" variant="contained" onClick={onBackToHomeClicked}>Back to Home</Button>
-            </Box>
-        </React.Fragment>
-    )
+    return <Button startIcon={<ArrowBackIcon />} color="primary" variant="contained" onClick={onBackToHomeClicked}>Back to Home</Button>
+
 }
 
 export default BackToHomeButton
