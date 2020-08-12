@@ -1,18 +1,51 @@
 import React from 'react';
-import { useFirestoreConnect, useFirebase, useFirestore } from 'react-redux-firebase';
+import { useFirestoreConnect, useFirestore } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import {
-  Card,
-  CardContent,
   Typography,
-  CardActions,
-  Button,
-  Grid,
   Box,
+  TableContainer,
+  Paper,
+  makeStyles,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Table,
+  Button,
+  withStyles,
 } from '@material-ui/core';
 import InventoryItem from './InventoryItem';
+import { Link } from 'react-router-dom';
+import DeleteInventoryItemButton from '../DeleteInventoryItemButton';
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
+
+export const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+export const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
 
 const InventoryItems = () => {
+  const classes = useStyles()
   const firestore = useFirestore()
   const { auth } = useSelector((state) => state.firebase);
 
@@ -45,13 +78,24 @@ const InventoryItems = () => {
 
   if (inventoryItems && inventoryItems.length > 0) {
     return (
-      <Grid container spacing={4}>
-        {inventoryItems.map((item) => (
-          <Grid item xs={12} sm={6} md={4} key={item.itemId}>
-            <InventoryItem item={item} onDeleteClicked={(e) => onDeleteClicked(e, item.itemId)} />
-          </Grid>
-        ))}
-      </Grid>
+      <Box mt={2}>
+        <TableContainer component={Paper} mt={1}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Item Name</StyledTableCell>
+                <StyledTableCell>Description</StyledTableCell>
+                <StyledTableCell align="right">Actions</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {inventoryItems.map((item) => (
+                <InventoryItem item={item} onDeleteClicked={(e) => onDeleteClicked(e, item.itemId)} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
     );
   }
 
