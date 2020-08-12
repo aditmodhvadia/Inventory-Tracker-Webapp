@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
 import InventoryItems from '../inventoryitems/InventoryItems';
-import { Grid, Box } from '@material-ui/core';
-import AddItemButton from '../inventoryitems/AddItemButton';
+import { Grid, Box, Fab, makeStyles } from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-class Dashboard extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <Box m={2}>
-          <Grid container direction='column'>
-            <Grid container alignItems='flex-end' justify='flex-end'>
-              <AddItemButton />
-            </Grid>
-            <Grid item xs={12}>
-              <InventoryItems />
-            </Grid>
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+}));
+
+const Dashboard = () => {
+  const classes = useStyles()
+  return (
+    <React.Fragment>
+      <Box m={2}>
+        <Grid container direction='column'>
+          <Grid item xs={12}>
+            <InventoryItems />
           </Grid>
-        </Box>
-      </React.Fragment>
-    );
-  }
+        </Grid>
+      </Box>
+      <Fab variant="extended" color="primary" className={classes.fab}>
+        <AddCircleIcon className={classes.extendedIcon} />
+          Add Item
+        </Fab>
+    </React.Fragment>
+  );
 }
 
 export default Dashboard;
