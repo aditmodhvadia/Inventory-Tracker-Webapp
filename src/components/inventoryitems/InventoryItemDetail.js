@@ -12,15 +12,26 @@ const InventoryItemDetail = props => {
     const firestore = useFirestore()
     const { auth } = useSelector((state) => state.firebase);
 
-    useFirestoreConnect([
-        {
-            collection: `users/${auth.uid}/inventoryItems`,
-            storeAs: 'item',
-            doc: props.match.params.id.toString()
-        }
-    ])
-
     const item = useSelector(state => state.firestore.ordered.item && state.firestore.ordered.item[0])
+
+    const fireStoreRequest = [{
+        collection: `users/${auth.uid}/inventoryItems`,
+        storeAs: 'item',
+        doc: props.match.params.id.toString()
+    }]
+
+    if (item) {
+        fireStoreRequest.push({
+            collection: `users/${auth.uid}/bags`,
+            storeAs: 'bag',
+            // doc: item.bagOwnerId.toString()
+            doc: '11'
+        })
+    }
+
+    useFirestoreConnect(fireStoreRequest)
+
+    const bag = useSelector(state => state.firestore.ordered.bag && state.firestore.ordered.bag[0])
 
     const history = useHistory()
     const onDeleteItemClicked = () => {
@@ -30,7 +41,7 @@ const InventoryItemDetail = props => {
         }).then(history.goBack())
     }
 
-    if (item) {
+    if (item && bag) {
         console.log(item);
         return (
             <div>
@@ -44,19 +55,35 @@ const InventoryItemDetail = props => {
                             <DeleteInventoryItemButton onClick={onDeleteItemClicked} />
                         </Grid>
                     </Grid>
-                    <Card key={item.itemId} variant="outlined">
-                        <CardContent>
-                            <Typography variant='h5' component='h2'>
-                                Name: {item.itemName}
-                            </Typography>
-                            <Typography variant='subtitle1'>
-                                {item.itemDesc === '' ? "No description" : "Description: " + item.itemDesc}
-                            </Typography>
-                            <Typography variant='body1' component='h4'>
-                                Quantity: {item.itemQuantity}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <Grid container spacing={2}>
+                        <Grid item xs={3}>
+                            <Card key={item.itemId} variant="outlined">
+                                <CardContent>
+                                    <Typography variant='h5' component='h2'>
+                                        Name: {item.itemName}
+                                    </Typography>
+                                    <Typography variant='subtitle1'>
+                                        {item.itemDesc === '' ? "No description" : "Description: " + item.itemDesc}
+                                    </Typography>
+                                    <Typography variant='body1' component='h4'>
+                                        Quantity: {item.itemQuantity}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Card key={bag.bagId} variant="outlined">
+                                <CardContent>
+                                    <Typography variant='h5' component='h2'>
+                                        Bag Name: {bag.bagName}
+                                    </Typography>
+                                    <Typography variant='subtitle1'>
+                                        {bag.bagDesc === '' ? "No bag description" : "Description: " + bag.bagDesc}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
                 </Box>
             </div>
         )

@@ -65,8 +65,8 @@ class AppNavbar extends Component {
             {isAuthenticated ? (
               <Button
                 size='large'
-                color='secondary'
-                variant='contained'
+                color='inherit'
+                component={Link}
                 onClick={this.onLogoutClicked}>
                 Logout
               </Button>
