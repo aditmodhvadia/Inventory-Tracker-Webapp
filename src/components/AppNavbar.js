@@ -42,7 +42,9 @@ class AppNavbar extends Component {
       <div style={{ flexGrow: 1 }}>
         <AppBar position='static'>
           <Toolbar>
-            <IconButton onClick={this.onMenuClicked} color='inherit'><MenuIcon /></IconButton>
+            {isAuthenticated ? (
+              <IconButton onClick={this.onMenuClicked} color='inherit'><MenuIcon /></IconButton>
+            ) : null}
             <Button to='/' component={Link} color='inherit' size='large'>
               Track Items
             </Button>

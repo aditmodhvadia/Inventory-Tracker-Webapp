@@ -93,6 +93,7 @@ const InventoryItems = () => {
               {inventoryItems.map((item) => (
                 <InventoryItem
                   item={item}
+                  key={item.itemId}
                   onDeleteClicked={(e) => onDeleteClicked(e, item.itemId)}
                 />
               ))}
