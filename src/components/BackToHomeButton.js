@@ -1,7 +1,6 @@
 import React from 'react'
-import { Button, Box } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 const BackToHomeButton = () => {

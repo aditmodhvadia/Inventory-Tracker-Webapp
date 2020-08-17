@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import InventoryItems from '../inventoryitems/InventoryItems';
 import { Grid, Box, Fab, makeStyles, Drawer, List, ListItem, ListItemText } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Link, useHistory } from 'react-router-dom';
 import { ADD_ITEM_ROUTE, ADD_BAG_ROUTE, HOME_ROUTE } from '../../routes';
-import { useState } from 'react';
-import LoadingSpinner from '../layouts/LoadingSpinner'
 import { useSelector, connect } from 'react-redux';
 import { toggleDrawer } from '../../actions/drawerActions'
 
@@ -77,6 +75,6 @@ const Dashboard = (props) => {
   );
 };
 
-export default connect((state, props) => ({
+export default connect((state) => ({
   drawer: state.drawer
 }), { toggleDrawer })(Dashboard);

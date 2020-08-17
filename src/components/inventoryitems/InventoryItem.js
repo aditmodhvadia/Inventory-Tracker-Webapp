@@ -1,13 +1,6 @@
 import React from 'react';
 import {
-  Card,
-  CardContent,
-  Typography,
-  CardActions,
   Button,
-  TableRow,
-  TableCell,
-  withStyles,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import DeleteInventoryItemButton from '../DeleteInventoryItemButton';
