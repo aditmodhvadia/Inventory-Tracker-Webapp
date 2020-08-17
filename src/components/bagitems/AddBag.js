@@ -5,37 +5,18 @@ import {
     Typography,
     Box,
     Button,
-    Select,
-    MenuItem,
-    FormControl,
-    makeStyles,
-    InputLabel,
 } from '@material-ui/core';
-import { useFirestoreConnect, useFirestore } from 'react-redux-firebase';
-import { useSelector } from 'react-redux';
-import LoadingSpinner from '../layouts/LoadingSpinner';
+import { useFirestore } from 'react-redux-firebase';
+import { useSelector, connect } from 'react-redux';
 import {
-    isItemNameValid,
-    isItemDescriptionValid,
-    isItemQuantityValid,
     isBagDescriptionValid,
     isBagNameValid,
 } from '../../helpers/utils';
 import { useHistory } from 'react-router-dom';
-import { MaterialPicker, SketchPicker } from 'react-color';
+import { SketchPicker } from 'react-color';
+import { showSnackBar } from '../../actions/snackBarActions'
 
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
-}));
-
-const AddBag = () => {
-    const classes = useStyles();
+const AddBag = (props) => {
 
     const [bagName, setBagName] = useState('');
     const [bagDesc, setBagDesc] = useState('');
@@ -48,6 +29,9 @@ const AddBag = () => {
     };
 
     const history = useHistory();
+
+    const { showSnackBar } = props
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -75,7 +59,11 @@ const AddBag = () => {
                     bagId: docRef.id,
                 });
             })
-            .then(() => history.goBack());
+            .then(() => {
+                showSnackBar("Bag added")
+                history.goBack()
+            });
+
     };
 
     const onColorChange = (value) => {
@@ -140,8 +128,8 @@ const AddBag = () => {
             </Grid>
         </React.Fragment>
     );
-
-    return <LoadingSpinner />;
 };
 
-export default AddBag;
+export default connect((state) => ({ snackBar: state.snackBar }), {
+    showSnackBar
+})(AddBag);

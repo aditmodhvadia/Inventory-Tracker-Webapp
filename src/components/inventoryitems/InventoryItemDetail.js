@@ -1,12 +1,13 @@
 import React from 'react'
 import { useFirestore, useFirestoreConnect } from 'react-redux-firebase'
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import LoadingSpinner from '../layouts/LoadingSpinner';
 import BackToHomeButton from '../BackToHomeButton';
 import { Grid, Box, Card, CardContent, Typography } from '@material-ui/core';
 import EditInventoryItemButton from '../EditInventoryItemButton';
 import DeleteInventoryItemButton from '../DeleteInventoryItemButton';
 import { useHistory } from 'react-router-dom';
+import { showSnackBar } from '../../actions/snackBarActions';
 
 const InventoryItemDetail = props => {
     const firestore = useFirestore()
@@ -33,12 +34,17 @@ const InventoryItemDetail = props => {
 
     const bag = useSelector(state => state.firestore.ordered.bag && state.firestore.ordered.bag[0])
 
+    const { showSnackBar } = props
+
     const history = useHistory()
     const onDeleteItemClicked = () => {
         firestore.delete({
             collection: `users/${auth.uid}/inventoryItems`,
             doc: item.itemId.toString()
-        }).then(history.goBack())
+        }).then(() => {
+            showSnackBar('Item Deleted')
+            history.goBack()
+        })
     }
 
     if (item && bag) {
@@ -94,4 +100,6 @@ const InventoryItemDetail = props => {
     )
 }
 
-export default InventoryItemDetail
+export default connect((state, props) => (
+    { snackBar: state.snackBar }
+), { showSnackBar })(InventoryItemDetail)

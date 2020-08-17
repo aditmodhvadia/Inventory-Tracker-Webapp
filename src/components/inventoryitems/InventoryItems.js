@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFirestoreConnect, useFirestore } from 'react-redux-firebase';
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import {
   Typography,
   Box,
@@ -15,6 +15,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import InventoryItem from './InventoryItem';
+import { showSnackBar } from '../../actions/snackBarActions'
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -52,7 +53,7 @@ const InventoryItems = () => {
         collection: `users/${auth.uid}/inventoryItems`,
         doc: itemId.toString(),
       })
-      .then(console.log('Item deleted'));
+      .then(showSnackBar('Item Deleted'));
   };
   useFirestoreConnect([
     {
@@ -107,4 +108,4 @@ const InventoryItems = () => {
   return <div>{inventoryItems}</div>;
 };
 
-export default InventoryItems;
+export default connect(() => { }, { showSnackBar })(InventoryItems);

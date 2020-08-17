@@ -1,1 +1,3 @@
 export const TOGGLE_DRAWER = 'TOGGLE_DRAWER'
+export const SHOW_SNACKBAR = 'SHOW_SNACKBAR'
+export const HIDE_SNACKBAR = 'HIDE_SNACKBAR'

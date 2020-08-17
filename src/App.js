@@ -27,6 +27,7 @@ import {
 import AddItem from './components/inventoryitems/AddItem';
 import InventoryItemDetail from './components/inventoryitems/InventoryItemDetail';
 import AddBag from './components/bagitems/AddBag';
+import BottomLeftSnackBar from './components/BottomLeftSnackBar';
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
                 />
                 <Route component={ErrorPage} />
               </Switch>
+              <BottomLeftSnackBar />
             </div>
           </Router>
         </ThemeProvider>

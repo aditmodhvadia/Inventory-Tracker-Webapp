@@ -12,7 +12,7 @@ import {
   InputLabel,
 } from '@material-ui/core';
 import { useFirestoreConnect, useFirestore } from 'react-redux-firebase';
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import LoadingSpinner from '../layouts/LoadingSpinner';
 import {
   isItemNameValid,
@@ -20,6 +20,7 @@ import {
   isItemQuantityValid,
 } from '../../helpers/utils';
 import { useHistory } from 'react-router-dom';
+import { showSnackBar } from '../../actions/snackBarActions'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddItem = () => {
+const AddItem = (props) => {
   const classes = useStyles();
 
   const [itemName, setItemName] = useState('');
@@ -53,6 +54,8 @@ const AddItem = () => {
   ]);
 
   const bags = useSelector((state) => state.firestore.ordered.bags);
+
+  const { showSnackBar } = props
 
   const history = useHistory();
 
@@ -88,7 +91,10 @@ const AddItem = () => {
           itemId: docRef.id,
         });
       })
-      .then(() => history.goBack());
+      .then(() => {
+        showSnackBar("Item added")
+        history.goBack()
+      });
   };
 
   if (bags) {
@@ -173,4 +179,6 @@ const AddItem = () => {
   return <LoadingSpinner />;
 };
 
-export default AddItem;
+export default connect((state, props) => ({ snackBar: state.snackBar }), {
+  showSnackBar
+})(AddItem);
