@@ -3,7 +3,7 @@ import { useFirestore, useFirestoreConnect } from 'react-redux-firebase'
 import { useSelector } from 'react-redux';
 import LoadingSpinner from '../layouts/LoadingSpinner';
 import BackToHomeButton from '../BackToHomeButton';
-import { Grid, Box, Card, CardContent, Typography, Button, CardActions } from '@material-ui/core';
+import { Grid, Box, Card, CardContent, Typography } from '@material-ui/core';
 import EditInventoryItemButton from '../EditInventoryItemButton';
 import DeleteInventoryItemButton from '../DeleteInventoryItemButton';
 import { useHistory } from 'react-router-dom';

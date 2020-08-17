@@ -7,7 +7,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import PropTypes from 'prop-types';
-import { Button, Box } from '@material-ui/core';
+import { Button, Box, IconButton } from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
+import { toggleDrawer } from '../actions/drawerActions'
 
 class AppNavbar extends Component {
   state = {
@@ -23,6 +25,11 @@ class AppNavbar extends Component {
     }
   }
 
+  onMenuClicked = () => {
+    const { toggleDrawer } = this.props;
+    toggleDrawer()
+  }
+
   onLogoutClicked = () => {
     const { firebase } = this.props;
     firebase.logout();
@@ -35,6 +42,9 @@ class AppNavbar extends Component {
       <div style={{ flexGrow: 1 }}>
         <AppBar position='static'>
           <Toolbar>
+            {isAuthenticated ? (
+              <IconButton onClick={this.onMenuClicked} color='inherit'><MenuIcon /></IconButton>
+            ) : null}
             <Button to='/' component={Link} color='inherit' size='large'>
               Track Items
             </Button>
@@ -87,5 +97,6 @@ export default compose(
   firebaseConnect(),
   connect((state, props) => ({
     auth: state.firebase.auth,
-  }))
+    drawer: state.drawer
+  }), { toggleDrawer })
 )(AppNavbar);

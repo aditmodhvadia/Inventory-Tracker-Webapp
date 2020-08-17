@@ -3,6 +3,7 @@ import firebase from "firebase";
 import 'firebase/firestore'
 import { firebaseReducer } from 'react-redux-firebase'
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore'
+import drawerReducer from "./reducers/drawerReducer";
 // TODO: Reducers
 const firebaseConfig = {
     apiKey: "AIzaSyDbodakivKuLlf_ycNoIMNnspxbgBPHX2M",
@@ -36,6 +37,7 @@ firebase.initializeApp(firebaseConfig)
 const rootReducer = combineReducers({
     firebase: firebaseReducer,
     firestore: firestoreReducer,
+    drawer: drawerReducer,
     // notify: notifyReducer Add custom reducers here
 })
 
