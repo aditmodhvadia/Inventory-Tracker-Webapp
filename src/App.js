@@ -22,9 +22,11 @@ import {
   REGISTER_ROUTE,
   ADD_ITEM_ROUTE,
   ITEM_DETAIL_ROUTE,
+  ADD_BAG_ROUTE,
 } from './routes';
 import AddItem from './components/inventoryitems/AddItem';
 import InventoryItemDetail from './components/inventoryitems/InventoryItemDetail';
+import AddBag from './components/bagitems/AddBag';
 
 function App() {
   return (
@@ -57,6 +59,11 @@ function App() {
                   exact
                   path={ADD_ITEM_ROUTE}
                   component={UserIsAuthenticated(AddItem)}
+                />
+                <Route
+                  exact
+                  path={ADD_BAG_ROUTE}
+                  component={UserIsAuthenticated(AddBag)}
                 />
                 <Route
                   exact
