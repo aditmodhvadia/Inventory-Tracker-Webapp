@@ -31,7 +31,7 @@ const Dashboard = (props) => {
   const classes = useStyles();
   const { drawerOpen } = useSelector(state => state.drawer)
   const history = useHistory()
-  const location = useLocation()
+  const { pathname } = useLocation()
 
   const toggleDrawerLocal = (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -51,7 +51,7 @@ const Dashboard = (props) => {
       <Box m={2}>
         <Grid container direction='column'>
           <Grid item xs={12}>
-            {location.pathname === BAG_LIST_ROUTE ? <BagItems /> : <InventoryItems />}
+            {pathname === BAG_LIST_ROUTE ? <BagItems /> : <InventoryItems />}
           </Grid>
         </Grid>
       </Box>
@@ -71,11 +71,11 @@ const Dashboard = (props) => {
       <Fab
         variant='extended'
         color='primary'
-        to={ADD_ITEM_ROUTE}
+        to={pathname === BAG_LIST_ROUTE ? ADD_BAG_ROUTE : ADD_ITEM_ROUTE}
         className={classes.fab}
         component={Link}>
         <AddCircleIcon className={classes.extendedIcon} />
-        Add Item
+        {pathname === BAG_LIST_ROUTE ? "Add Bag" : "Add Item"}
       </Fab>
     </React.Fragment>
   );
