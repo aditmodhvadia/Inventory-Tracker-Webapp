@@ -25,8 +25,7 @@ const InventoryItemDetail = props => {
         fireStoreRequest.push({
             collection: `users/${auth.uid}/bags`,
             storeAs: 'bag',
-            // doc: item.bagOwnerId.toString()
-            doc: '11'
+            doc: item.bagOwnerId.toString()
         })
     }
 
@@ -46,6 +45,9 @@ const InventoryItemDetail = props => {
             history.goBack()
         })
     }
+
+    console.log(item);
+    console.log(bag);
 
     if (item && bag) {
         console.log(item);
