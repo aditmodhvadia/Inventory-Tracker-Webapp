@@ -42,10 +42,11 @@ export const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-const InventoryItems = () => {
+const InventoryItems = props => {
   const classes = useStyles();
   const firestore = useFirestore();
   const { auth } = useSelector((state) => state.firebase);
+  const { showSnackBar } = props
 
   const onDeleteClicked = (e, itemId) => {
     firestore
@@ -53,7 +54,9 @@ const InventoryItems = () => {
         collection: `users/${auth.uid}/inventoryItems`,
         doc: itemId.toString(),
       })
-      .then(showSnackBar('Item Deleted'));
+      .then(() => {
+        showSnackBar('Item Deleted')
+      });
   };
   useFirestoreConnect([
     {
@@ -108,4 +111,4 @@ const InventoryItems = () => {
   return <div>{inventoryItems}</div>;
 };
 
-export default connect(() => { }, { showSnackBar })(InventoryItems);
+export default connect(null, { showSnackBar })(InventoryItems);

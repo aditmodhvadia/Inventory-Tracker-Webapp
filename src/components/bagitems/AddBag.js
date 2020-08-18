@@ -130,6 +130,6 @@ const AddBag = (props) => {
     );
 };
 
-export default connect((state) => ({ snackBar: state.snackBar }), {
+export default connect(null, {
     showSnackBar
 })(AddBag);

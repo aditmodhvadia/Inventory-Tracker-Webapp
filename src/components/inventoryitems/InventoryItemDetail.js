@@ -100,6 +100,4 @@ const InventoryItemDetail = props => {
     )
 }
 
-export default connect((state, props) => (
-    { snackBar: state.snackBar }
-), { showSnackBar })(InventoryItemDetail)
+export default connect(null, { showSnackBar })(InventoryItemDetail)

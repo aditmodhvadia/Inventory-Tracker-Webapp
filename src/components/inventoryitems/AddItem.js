@@ -179,6 +179,6 @@ const AddItem = (props) => {
   return <LoadingSpinner />;
 };
 
-export default connect((state, props) => ({ snackBar: state.snackBar }), {
+export default connect(null, {
   showSnackBar
 })(AddItem);
