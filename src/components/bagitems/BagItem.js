@@ -20,7 +20,7 @@ const BagItem = ({ bag, onDeleteClicked }) => {
                 <Button
                     size='small'
                     component={Link}
-                    to={`item/${bag.bagId}`}
+                    to={`/bag/${bag.bagId}`}
                     startIcon={<InfoOutlinedIcon />}>
                     Details
         </Button>

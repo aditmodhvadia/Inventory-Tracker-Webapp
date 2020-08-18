@@ -5,3 +5,4 @@ export const ADD_ITEM_ROUTE = '/item/add';
 export const BAG_LIST_ROUTE = '/home/bags';
 export const ADD_BAG_ROUTE = '/bag/add';
 export const ITEM_DETAIL_ROUTE = '/item/:id';
+export const BAG_DETAIL_ROUTE = '/bag/:id';

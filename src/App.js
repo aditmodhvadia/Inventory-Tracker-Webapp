@@ -24,12 +24,14 @@ import {
   ITEM_DETAIL_ROUTE,
   ADD_BAG_ROUTE,
   BAG_LIST_ROUTE,
+  BAG_DETAIL_ROUTE,
 } from './routes';
 import AddItem from './components/inventoryitems/AddItem';
 import InventoryItemDetail from './components/inventoryitems/InventoryItemDetail';
 import AddBag from './components/bagitems/AddBag';
 import BottomLeftSnackBar from './components/BottomLeftSnackBar';
 import BagItems from './components/bagitems/BagItems';
+import BagItemDetail from './components/bagitems/BagItemDetail';
 
 function App() {
   return (
@@ -44,7 +46,13 @@ function App() {
                   <Redirect to='/home' />
                 </Route>
                 <Route
+                  exact
                   path={HOME_ROUTE}
+                  component={UserIsAuthenticated(Dashboard)}
+                />
+                <Route
+                  exact
+                  path={BAG_LIST_ROUTE}
                   component={UserIsAuthenticated(Dashboard)}
                 />
                 <Route
@@ -73,8 +81,8 @@ function App() {
                   component={UserIsAuthenticated(InventoryItemDetail)}
                 />
                 <Route
-                  path={BAG_LIST_ROUTE}
-                  component={UserIsAuthenticated(BagItems)}
+                  path={BAG_DETAIL_ROUTE}
+                  component={UserIsAuthenticated(BagItemDetail)}
                 />
                 <Route component={ErrorPage} />
               </Switch>
