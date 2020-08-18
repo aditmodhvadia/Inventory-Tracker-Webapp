@@ -30,7 +30,6 @@ import AddItem from './components/inventoryitems/AddItem';
 import InventoryItemDetail from './components/inventoryitems/InventoryItemDetail';
 import AddBag from './components/bagitems/AddBag';
 import BottomLeftSnackBar from './components/BottomLeftSnackBar';
-import BagItems from './components/bagitems/BagItems';
 import BagItemDetail from './components/bagitems/BagItemDetail';
 
 function App() {
