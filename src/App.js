@@ -1,21 +1,21 @@
-import React from 'react';
-import { ThemeProvider } from '@material-ui/core';
-import theme from './theme';
+import React from "react";
+import { ThemeProvider } from "@material-ui/core";
+import theme from "./theme";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
-} from 'react-router-dom';
-import Login from './components/layouts/Login';
-import Dashboard from './components/layouts/Dashboard';
-import Register from './components/layouts/Register';
-import AppNavbar from './components/AppNavbar';
-import { Provider } from 'react-redux';
-import store, { rrfProps } from './store';
-import ErrorPage from './components/layouts/ErrorPage';
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import { UserIsAuthenticated, UserIsNotAuthenticated } from './helpers/auth';
+} from "react-router-dom";
+import Login from "./components/layouts/Login";
+import Dashboard from "./components/layouts/Dashboard";
+import Register from "./components/layouts/Register";
+import AppNavbar from "./components/AppNavbar";
+import { Provider } from "react-redux";
+import store, { rrfProps } from "./store";
+import ErrorPage from "./components/layouts/ErrorPage";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { UserIsAuthenticated, UserIsNotAuthenticated } from "./helpers/auth";
 import {
   HOME_ROUTE,
   LOGIN_ROUTE,
@@ -25,12 +25,12 @@ import {
   ADD_BAG_ROUTE,
   BAG_LIST_ROUTE,
   BAG_DETAIL_ROUTE,
-} from './routes';
-import AddItem from './components/inventoryitems/AddItem';
-import InventoryItemDetail from './components/inventoryitems/InventoryItemDetail';
-import AddBag from './components/bagitems/AddBag';
-import BottomLeftSnackBar from './components/BottomLeftSnackBar';
-import BagItemDetail from './components/bagitems/BagItemDetail';
+} from "./routes";
+import AddItem from "./components/inventoryitems/AddItem";
+import InventoryItemDetail from "./components/inventoryitems/InventoryItemDetail";
+import AddBag from "./components/bagitems/AddBag";
+import BottomLeftSnackBar from "./components/BottomLeftSnackBar";
+import BagItemDetail from "./components/bagitems/BagItemDetail";
 
 function App() {
   return (
@@ -38,11 +38,11 @@ function App() {
       <ReactReduxFirebaseProvider {...rrfProps}>
         <ThemeProvider theme={theme}>
           <Router>
-            <div className='App'>
+            <div className="App">
               <AppNavbar />
               <Switch>
-                <Route exact path='/'>
-                  <Redirect to='/home' />
+                <Route exact path="/">
+                  <Redirect to="/home" />
                 </Route>
                 <Route
                   exact
